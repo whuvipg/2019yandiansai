@@ -1,0 +1,42 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+    <arg name="SaveFolder" default="/home/pro/data/temp/"/>
+    <arg name="isShow" default="true"/>    
+    <arg name="isSave" default="true"/>
+
+    ################ start frame node ################
+    <include file="$(find frame)/launch/frame.launch">
+	    <arg name="SaveFolder" value="$(arg SaveFolder)"/>
+        <arg name="isShow" value="false"/>
+	    <arg name="isSave" value="false"/> 
+        <arg name="serial_port" value="/dev/ttyVideo0"/>  
+    </include>
+
+    ################ start infrared node ################
+    <include file="$(find infrared)/launch/infrared.launch">
+	    <arg name="SaveFolder" value="$(arg SaveFolder)"/>
+        <arg name="isShow" value="false"/>
+	    <arg name="isSave" value="false"/> 
+        <arg name="serial_port" value="/dev/ttyVideo1"/>  
+    </include>
+
+    ################ start event node ################
+    <include file="$(find event)/launch/event.launch">
+	    <arg name="SaveFolder" value="$(arg SaveFolder)"/>
+        <arg name="isShow" value="false"/>
+	    <arg name="isSave" value="false"/> 
+	    <arg name="isSaveRaw" value="false"/>         
+    </include>    
+
+    ################ start img_registration node ################
+    <node pkg="img_registration" type="img_registration" name="img_registration" output="screen">
+        <param name="SaveFolder" value="$(arg SaveFolder)"/>
+        <param name="isShow" value="$(arg isShow)"/>
+        <param name="isSave" value="$(arg isSave)"/>
+        <rosparam param="vtform_frame_infrared">[2.2214, 0.0287, -484.9768, -0.0112, 2.3166, -338.7740]</rosparam>
+        <rosparam param="vtform_event_infrared">[0.6709, 0.0258, -185.9207, -0.0154, 0.6844, 5.6929]</rosparam>
+    </node>
+
+
+</launch>

@@ -1,0 +1,20 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+    <arg name="Config_File" default="/home/pro/Documents/yansai_robot/src/detection/params/detector_params.yml"/>
+
+    ################ start frame node ################
+    <include file="$(find frame)/launch/frame.launch">
+	    <arg name="SaveFolder" value=""/>
+        <arg name="isShow" value="false"/>
+	    <arg name="isSave" value="false"/> 
+        <arg name="serial_port" value="/dev/ttyVideo0"/>  
+    </include>  
+
+    ################ start detection node ################
+    <node pkg="detection" type="detection" name="detection" output="screen">
+        <param name="Config_File" value="$(arg Config_File)"/>    
+    </node>
+
+
+</launch>

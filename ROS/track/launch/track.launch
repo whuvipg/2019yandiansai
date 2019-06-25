@@ -1,0 +1,25 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+    ################ start img_fusion node ################
+    <include file="$(find img_fusion)/launch/img_fusion.launch">
+    </include>
+
+    ################ start frame node ################
+    <!-- <node pkg="perception" type="detection" name="detection" output="screen">
+    </node> -->
+
+    ################ start track node ################
+    <node pkg="track" type="track" name="track" output="screen">
+        <param name="rate" value="30"/>
+        <rosparam file="$(find track)/params/track_params.yaml" /> 
+    </node>
+
+    ################ start ugvdriver ################
+    <include file="$(find ugv_control)/launch/ugvdriver.launch">
+        <arg name="use_vo" default="false"/>
+		<arg name="use_gps" default="false"/>
+        <arg name="vo_init_thresh" default="1.0"/> 
+    </include>
+
+</launch>

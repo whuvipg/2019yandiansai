@@ -1,0 +1,16 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+    <arg name="SaveFolder" default="/home/pro/data/nonce/"/>
+    <arg name="isShow" default="false"/>    
+    <arg name="isSave" default="false"/>
+    <arg name="serial_port" default="/dev/ttyVideo1"/> 
+
+    <node pkg="infrared" type="infrared" name="infrared" output="screen">
+        <param name="SaveFolder" value="$(arg SaveFolder)"/>
+        <param name="isShow" value="$(arg isShow)"/>
+        <param name="isSave" value="$(arg isSave)"/> 
+        <param name="serial_port" value="$(arg serial_port)"/>                     
+    </node>
+
+</launch>

@@ -1,0 +1,16 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+    <arg name="SaveFolder" default="/home/pro/data/gaokong_taowu/"/>
+    <arg name="isShow" default="true"/>    
+    <arg name="isSave" default="true"/>
+    <arg name="isSaveRaw" default="false"/>    
+
+    <node pkg="event" type="event" name="event" output="screen">
+        <param name="SaveFolder" value="$(arg SaveFolder)"/>
+        <param name="isShow" value="$(arg isShow)"/>
+        <param name="isSave" value="$(arg isSave)"/> 
+        <param name="isSaveRaw" value="$(arg isSaveRaw)"/>               
+    </node>
+
+</launch>

@@ -1,0 +1,40 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+    <arg name="SaveFolder" default="/home/pro/data/temp/"/>
+    <arg name="isShow" default="false"/>    
+    <arg name="isSave" default="false"/>
+
+    ################ start frame node ################
+    <include file="$(find frame)/launch/frame.launch">
+	    <arg name="SaveFolder" value="$(arg SaveFolder)"/>
+        <arg name="isShow" value="false"/>
+	    <arg name="isSave" value="false"/> 
+        <arg name="serial_port" value="/dev/ttyVideo0"/>  
+    </include>
+
+    ################ start infrared node ################
+    <include file="$(find infrared)/launch/infrared.launch">
+	    <arg name="SaveFolder" value="$(arg SaveFolder)"/>
+        <arg name="isShow" value="false"/>
+	    <arg name="isSave" value="false"/> 
+        <arg name="serial_port" value="/dev/ttyVideo1"/>  
+    </include>
+
+    ################ start event node ################
+    <include file="$(find event)/launch/event.launch">
+	    <arg name="SaveFolder" value="$(arg SaveFolder)"/>
+        <arg name="isShow" value="false"/>
+	    <arg name="isSave" value="false"/> 
+	    <arg name="isSaveRaw" value="false"/>         
+    </include>    
+
+    ################ start img_fusion node ################
+    <!--<node pkg="img_fusion" type="img_fusion" name="img_fusion" output="screen">
+        <param name="SaveFolder" value="$(arg SaveFolder)"/>
+        <param name="isShow" value="$(arg isShow)"/>
+        <param name="isSave" value="$(arg isSave)"/>       
+    </node>-->
+
+
+</launch>
